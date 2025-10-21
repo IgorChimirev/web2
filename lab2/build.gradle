@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Для WildFly 21.0.0 (Jakarta EE 8) - используем javax.servlet
+    compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
+
+    // Jackson для JSON
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4.2'
+
+    // Для работы с JSON (альтернатива Jakarta JSON)
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.4'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.4'
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17)) // WildFly 21 лучше работает с Java 11
+    }
+}
+
+war {
+    archiveFileName = 'lab2.war'
+}
